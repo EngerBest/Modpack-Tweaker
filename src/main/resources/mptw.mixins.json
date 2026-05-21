@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.engerbest.mptw.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mptw.refmap.json",
+  "mixins": [
+    "CampfireMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

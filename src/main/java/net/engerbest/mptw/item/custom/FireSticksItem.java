@@ -1,5 +1,6 @@
 package net.engerbest.mptw.item.custom;
 
+import net.engerbest.mptw.config.ModCommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -49,14 +50,11 @@ public class FireSticksItem extends Item {
         return InteractionResultHolder.pass(itemStack);
     }
 
-    private static final float IGNITE_CHANCE = 0.5f;
-
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
         if (!(pLivingEntity instanceof Player player)) return;
 
         if (!pLevel.isClientSide()) {
-            boolean isSuccessful = pLevel.getRandom().nextFloat() < IGNITE_CHANCE;
             int duration = this.getUseDuration(pStack) - pTimeCharged;
 
             if (duration >= DELAY) {
@@ -65,6 +63,9 @@ public class FireSticksItem extends Item {
                 if (hitResult.getType() == HitResult.Type.BLOCK) {
                     BlockPos targetPos = hitResult.getBlockPos();
                     BlockState clickedState = pLevel.getBlockState(targetPos);
+
+                    float currentChance = ModCommonConfig.IGNITE_CHANCE.get().floatValue();
+                    boolean isSuccessful = pLevel.getRandom().nextFloat() < currentChance;
 
                     if (!player.getAbilities().instabuild) {
                         pStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));

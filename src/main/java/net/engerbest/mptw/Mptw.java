@@ -1,11 +1,12 @@
 package net.engerbest.mptw;
 
 import com.mojang.logging.LogUtils;
+import net.engerbest.mptw.config.ModCommonConfig;
 import net.engerbest.mptw.creativemodetab.ModCreativeModeTabs;
 import net.engerbest.mptw.item.ModItems;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -20,5 +21,7 @@ public class Mptw {
         ModItems.register(modEventBus);
 
         ModCreativeModeTabs.register(modEventBus);
+
+        context.registerConfig(ModConfig.Type.COMMON, ModCommonConfig.SPEC);
     }
 }

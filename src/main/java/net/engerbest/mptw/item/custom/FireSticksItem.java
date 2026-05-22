@@ -1,8 +1,7 @@
 package net.engerbest.mptw.item.custom;
 
-import net.engerbest.mptw.config.ModCommonConfig;
+import net.engerbest.mptw.Mptw;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -64,8 +63,8 @@ public class FireSticksItem extends Item {
                     BlockPos targetPos = hitResult.getBlockPos();
                     BlockState clickedState = pLevel.getBlockState(targetPos);
 
-                    float currentChance = ModCommonConfig.IGNITE_CHANCE.get().floatValue();
-                    boolean isSuccessful = pLevel.getRandom().nextFloat() < currentChance;
+                    float currentChance = Mptw.CONFIG.igniteChance;
+                    boolean isSuccessful = pLevel.getRandom().nextFloat() < currentChance / 100;
 
                     if (!player.getAbilities().instabuild) {
                         pStack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(player.getUsedItemHand()));

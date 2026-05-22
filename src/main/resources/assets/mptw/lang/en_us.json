@@ -1,5 +1,10 @@
 {
   "item.mptw.fire_sticks": "Fire Sticks",
 
-  "creativetab.mptw_tab": "Modpack Tweaker"
+  "creativetab.mptw_tab": "Modpack Tweaker",
+
+  "text.autoconfig.mptw-common.title": "Modpack Tweaker Common Config",
+
+  "text.autoconfig.mptw-common.option.igniteChance.@Tooltip": "Fire Sticks chance of igniting blocks in percents",
+  "text.autoconfig.mptw-common.option.igniteChance": "Ignite Chance"
 }

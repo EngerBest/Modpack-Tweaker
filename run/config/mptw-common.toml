@@ -1,6 +1,0 @@
-
-["Modpack Tweaker Config"]
-	#Chance of successful igniting the block (0.0 = 0%, 1.0 = 100%)
-	#Range: 0.0 ~ 1.0
-	igniteChance = 0.5
-

@@ -42,9 +42,8 @@ public class Mptw {
                             ((minecraft, parentScreen) -> {
                                 Screen configScreen = AutoConfig.getConfigScreen(ModClothCommonConfig.class, parentScreen).get();
 
-                                if (configScreen instanceof me.shedaniel.clothconfig2.gui.ClothConfigScreen clothScreen) {
+                                if (configScreen instanceof me.shedaniel.clothconfig2.gui.ClothConfigScreen clothScreen)
                                     clothScreen.setTransparentBackground(true);
-                                }
 
                                 return configScreen;
                             })

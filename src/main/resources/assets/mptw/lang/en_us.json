@@ -7,5 +7,9 @@
   "text.autoconfig.mptw-common.title": "Modpack Tweaker Common Config",
 
   "text.autoconfig.mptw-common.option.igniteChance.@Tooltip": "Fire Sticks chance of igniting blocks in percents",
-  "text.autoconfig.mptw-common.option.igniteChance": "Ignite Chance"
+  "text.autoconfig.mptw-common.option.igniteChance": "Ignite Chance",
+
+  "jei.mptw.block_hitting": "Block Hitting",
+  "jei.mptw.block_hitting.plus_tooltip": "Use on block (default Right-Click)",
+  "jei.mptw.block_hitting.arrow_tooltip": "Fragmenting chance: %s%%"
 }

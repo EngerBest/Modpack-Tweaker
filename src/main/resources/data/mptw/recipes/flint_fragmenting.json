@@ -1,0 +1,14 @@
+{
+  "type": "mptw:block_hitting",
+  "tool": {
+    "item": "minecraft:flint"
+  },
+  "block": {
+    "tag": "forge:stone"
+  },
+  "result": {
+    "item": "mptw:flint_fragment",
+    "count": 1
+  },
+  "chance": 0.5
+}

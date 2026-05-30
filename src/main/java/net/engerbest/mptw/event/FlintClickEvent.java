@@ -1,24 +1,20 @@
 package net.engerbest.mptw.event;
 
 import net.engerbest.mptw.Mptw;
-import net.engerbest.mptw.item.ModItems;
-import net.minecraft.client.particle.BreakingItemParticle;
+import net.engerbest.mptw.recipe.BlockHittingRecipe;
+import net.engerbest.mptw.recipe.ModRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,35 +30,44 @@ public class FlintClickEvent {
         Player player = event.getEntity();
         InteractionHand hand = event.getHand();
 
-        if (!itemStack.is(Items.FLINT) || !blockState.is(Tags.Blocks.STONE)) return;
+        var recipeManager = level.getRecipeManager();
+        var optionalRecipe = recipeManager.getAllRecipesFor(ModRecipes.BLOCK_HITTING_TYPE.get())
+                .stream()
+                .filter(r -> r.matches(itemStack, blockState))
+                .findFirst();
 
-        player.swing(hand);
+        if (optionalRecipe.isEmpty()) {
+            return;
+        }
+
+        BlockHittingRecipe recipe = optionalRecipe.get();
+
+        player.swing(hand, true);
 
         if (!level.isClientSide) {
             ServerLevel serverLevel = (ServerLevel) level;
-            float currentChance = Mptw.CONFIG.fragmentingChance;
-            boolean isSuccessful = level.random.nextFloat() < (currentChance / 100.0f);
 
             level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0f,
                     level.random.nextFloat() * 0.4f + 0.8f);
 
             Direction face = event.getFace();
-
             if (face == null) face = Direction.UP;
 
             double pX = pos.getX() + 0.5 + face.getStepX() * 0.52;
             double pY = pos.getY() + 0.5 + face.getStepY() * 0.52;
             double pZ = pos.getZ() + 0.5 + face.getStepZ() * 0.52;
 
-            if (isSuccessful) {
+            boolean isSuccess = level.random.nextDouble() < recipe.getChance();
+
+            if (isSuccess) {
                 if (!player.getAbilities().instabuild) {
                     itemStack.shrink(1);
                 }
 
-                ItemStack newItem = new ItemStack(ModItems.FLINT_FRAGMENT.get());
+                ItemStack result = recipe.getResultItem(serverLevel.registryAccess());
 
-                if (!player.getInventory().add(newItem)) {
-                    player.drop(newItem, false);
+                if (!player.getInventory().add(result.copy())) {
+                    player.drop(result.copy(), false);
                 }
 
                 int particleCount = 2;

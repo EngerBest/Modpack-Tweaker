@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.engerbest.mptw.config.ModClothCommonConfig;
 import net.engerbest.mptw.creativemodetab.ModCreativeModeTabs;
 import net.engerbest.mptw.item.ModItems;
+import net.engerbest.mptw.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,6 +28,8 @@ public class Mptw {
         ModItems.register(modEventBus);
 
         ModCreativeModeTabs.register(modEventBus);
+
+        ModRecipes.register(modEventBus);
 
         AutoConfig.register(ModClothCommonConfig.class, GsonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(ModClothCommonConfig.class).getConfig();

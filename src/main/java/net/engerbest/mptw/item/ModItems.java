@@ -16,6 +16,9 @@ public class ModItems {
     public static final RegistryObject<FireSticksItem> FIRE_STICKS = ITEMS.register("fire_sticks",
             () -> new FireSticksItem(new Item.Properties().durability(8)));
 
+    public static final RegistryObject<Item> FLINT_FRAGMENT = ITEMS.register("flint_fragment",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

@@ -19,6 +19,8 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.mptw_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.FIRE_STICKS.get());
+
+                        pOutput.accept(ModItems.FLINT_FRAGMENT.get());
                     })
                     .build());
 

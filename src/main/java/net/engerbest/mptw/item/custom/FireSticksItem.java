@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -39,7 +40,7 @@ public class FireSticksItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pHand);
-        BlockHitResult hitResult = getPlayerPOVHitResult(pLevel, pPlayer, net.minecraft.world.level.ClipContext.Fluid.NONE);
+        BlockHitResult hitResult = getPlayerPOVHitResult(pLevel, pPlayer, ClipContext.Fluid.NONE);
 
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             pPlayer.startUsingItem(pHand);
@@ -57,7 +58,7 @@ public class FireSticksItem extends Item {
             int duration = this.getUseDuration(pStack) - pTimeCharged;
 
             if (duration >= DELAY) {
-                BlockHitResult hitResult = getPlayerPOVHitResult(pLevel, player, net.minecraft.world.level.ClipContext.Fluid.NONE);
+                BlockHitResult hitResult = getPlayerPOVHitResult(pLevel, player, ClipContext.Fluid.NONE);
 
                 if (hitResult.getType() == HitResult.Type.BLOCK) {
                     BlockPos targetPos = hitResult.getBlockPos();

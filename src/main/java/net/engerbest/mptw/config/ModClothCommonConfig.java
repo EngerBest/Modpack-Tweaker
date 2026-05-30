@@ -10,4 +10,8 @@ public class ModClothCommonConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     @ConfigEntry.Gui.Tooltip
     public int igniteChance = 50;
+
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+    @ConfigEntry.Gui.Tooltip
+    public int fragmentingChance = 50;
 }

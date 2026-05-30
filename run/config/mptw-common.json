@@ -1,3 +1,4 @@
 {
-  "igniteChance": 50
+  "igniteChance": 50,
+  "fragmentingChance": 50
 }
